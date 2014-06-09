@@ -19,7 +19,7 @@ Get structure(s) currently assigned to a query src_compound_id.
 get.structure
 }
 \examples{
-get.structure("DB00321","2")
-get.structure("CHEMBL1231","1")
+get.structure("DB00321",2)
+get.structure("CHEMBL1231",1)
 }
 

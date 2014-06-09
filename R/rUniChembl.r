@@ -155,8 +155,8 @@ get.sAll.InCHIKey<-function(x){
 #' @param s : source id (default is 1)
 #' @export
 #' @examples
-#' get.structure("DB00321","2")
-#' get.structure("CHEMBL1231","1")
+#' get.structure("DB00321",2)
+#' get.structure("CHEMBL1231",1)
 
 get.structure<-function(x,s=1){
     url <- sprintf("https://www.ebi.ac.uk/unichem/rest/structure/%s/%d",x,s)
@@ -463,7 +463,7 @@ get.targets <- function(x,type='chemblid',org=NULL){
     if(is.null(org)){
         url<-switch(type,'https://www.ebi.ac.uk/chemblws/targets/%s.json',
                     'https://www.ebi.ac.uk/chemblws/targets/uniprot/%s.json')
-        url <- sprintf(url,id)
+        url <- sprintf(url,x)
         h <- getCurlHandle()
         d <- getURL(url, curl=h)
         status <- getCurlInfo(h)$response.code
