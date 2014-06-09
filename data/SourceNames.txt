@@ -1,0 +1,23 @@
+name	src_id
+1	chembl	1
+2	drugbank	2
+3	pdb	3
+4	iuphar	4
+5	pubchem_dotf	5
+6	kegg_ligand	6
+7	chebi	7
+8	nih_ncc	8
+9	zinc	9
+10	emolecules	10
+11	ibm	11
+12	atlas	12
+13	patents	13
+14	fdasrs	14
+15	surechem	15
+16	pharmgkb	17
+17	hmdb	18
+18	selleck	20
+19	pubchem_tpharma	21
+20	pubchem	22
+21	mcule	23
+22	nmrshiftdb2	24
