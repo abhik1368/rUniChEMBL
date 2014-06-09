@@ -406,7 +406,7 @@ get.bioactivity <- function(x, type='compound') {
     status <- getCurlInfo(h)$response.code
     rm(h)
     if (status == 200) {
-        data<-fromJSON(d)
+        data<-do.call(rbind, lapply(fromJSON(d), data.frame))
         return(data)
     } else {
         return(NULL)
