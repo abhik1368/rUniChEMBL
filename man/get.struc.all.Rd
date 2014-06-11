@@ -8,9 +8,9 @@
 get.struc.all(x, s = 1)
 }
 \arguments{
-\item{x}{: chemblid}
+\item{x}{: Input string chemblid}
 
-\item{s}{: source id (default is 1)}
+\item{s}{: Input integer source id (default is 1)}
 }
 \description{
 Get the standard InCHI and standard InCHI Key for the source
@@ -18,5 +18,13 @@ compound id
 }
 \details{
 get.struc.all
+}
+\examples{
+\donttest{
+# Get all the structure information using ChEMBL id and source.
+get.struc.all("CHEMBL1231",1)
+#using drugbank id and source
+get.structure("DB00321",2)
+}
 }
 

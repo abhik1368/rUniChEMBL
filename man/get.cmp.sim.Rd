@@ -10,7 +10,7 @@ get.cmp.sim(mol, sim = 70)
 \arguments{
 \item{mol}{: String representing smiles of the moelcule}
 
-\item{sim:}{Integer representing for percentage of similarity
+\item{sim}{: Integer representing for percentage of similarity
 for the query compound and the database molecules. Values ranges
 from 70 to 100.}
 }
@@ -21,4 +21,9 @@ from ChEMBL database given a smiles string as query and also given a similarity 
 \details{
 get.cmp.sim
 }
-
+\examples{
+# Get compound similarity with 70 percent or more
+get.cmp.sim("c1ccc(cc1)CN(c2cc(ccc2[N+](=O)[O-])c3c(nc(nc3CC)N)N)C",sim=70)
+# Get compound similarity with 80 percent or more
+get.cmp.sim("c1ccc(cc1)CN(c2cc(ccc2[N+](=O)[O-])c3c(nc(nc3CC)N)N)C",sim=80)
+}

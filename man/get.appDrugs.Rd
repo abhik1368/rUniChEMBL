@@ -8,7 +8,7 @@
 get.appDrugs(x)
 }
 \arguments{
-\item{x}{: ChEMBL target ID.}
+\item{x}{: string  ChEMBL target ID.}
 }
 \description{
 This function retrieves a dataframe of all approved drug compounds from
@@ -16,5 +16,11 @@ ChEMBL database given a string of ChEMBL target ID.
 }
 \details{
 get.appDrugs
+}
+\examples{
+\donttest{
+#get chembl ids of approved drugs
+get.appDrugs("CHEMBL1824")
+}
 }
 

@@ -8,9 +8,9 @@
 get.mapping.full(x, y)
 }
 \arguments{
-\item{X}{: source compound id}
+\item{x}{: Input integer source id}
 
-\item{y}{: source compound id}
+\item{y}{: Input integer source id}
 }
 \description{
 Obtain a full mapping between two sources. Uses only currently
@@ -20,7 +20,11 @@ assigned src_compound_ids from both sources.
 get.mapping.full
 }
 \examples{
-get.mapping.full("3","1")
-get.mapping.full("9","1")
+\donttest{
+# Get full mapping of PDBe and ChEMBL
+get.mapping.full(3,1)
+# Get full mapping of ZINC and ChEMBL
+get.mapping.full(9,1)
+}
 }
 

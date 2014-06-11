@@ -9,9 +9,9 @@
 get.sAll.obs(x, y)
 }
 \arguments{
-\item{x:}{source compound id}
+\item{x}{: Input string source compound id}
 
-\item{y:}{to source id}
+\item{y}{: Input integer to source id}
 }
 \description{
 Get a list of all src_compound_ids from all sources with BOTH
@@ -19,5 +19,13 @@ current AND obsolete to the same structure with an obsolete assignment to the #'
 }
 \details{
 get.sAll.obs
+}
+\examples{
+\donttest{
+#get for drugbank compound and source
+get.sAll.obs("DB07699",2)
+#get for chembl compound and source
+get.sAll.obs("CHEMBL12",1)
+}
 }
 

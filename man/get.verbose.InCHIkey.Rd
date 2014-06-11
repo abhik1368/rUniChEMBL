@@ -8,7 +8,7 @@
 get.verbose.InCHIkey(x)
 }
 \arguments{
-\item{x}{: InCHI Key}
+\item{x}{: Input string InCHI Key}
 }
 \description{
 Returns a dataframe containing src_id (the src_id for this source),
@@ -30,5 +30,13 @@ shown if aux_for_url=1).
 }
 \details{
 get.verbose.InCHIkey
+}
+\examples{
+\donttest{
+# get for InCHIkey
+get.verbose.InCHIkey("GZUITABIAKMVPG-UHFFFAOYSA-N")
+
+get.verbose.InCHIkey("AAOVKJBEBIDNHE-UHFFFAOYSA-N")
+}
 }
 

@@ -8,9 +8,9 @@
 get.scid.sid(x, y)
 }
 \arguments{
-\item{x}{: Source compound id}
+\item{x}{: Input string Source compound id}
 
-\item{y}{: Source id}
+\item{y}{: Input integer Source id}
 }
 \description{
 a list of all src_compound_ids from all sources which are
@@ -23,7 +23,12 @@ with a current assignment.
 get.scid.sid
 }
 \examples{
-get.scid.sid("CHEMBL12","1")
-get.scid.sid("DB00789","2")
+\donttest{
+# Get source compound ids and source information
+# Using ChEMBL ID and source
+get.scid.sid("CHEMBL12",1)
+# Using drugbank id and source
+get.scid.sid("DB00789",2)
+}
 }
 

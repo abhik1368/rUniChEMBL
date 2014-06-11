@@ -8,11 +8,11 @@
 get.targets(x, type = "chemblid", org = NULL)
 }
 \arguments{
-\item{x}{: chemblid}
+\item{x}{: Input string chemblid}
 
-\item{type:}{'chemblid' or 'uniprot'}
+\item{type}{: Input string 'chemblid' or 'uniprot'}
 
-\item{org:}{Species name like "Homo sapiens","Plasmodium falciparum" and etc.}
+\item{org}{: Input string species name like "Homo sapiens","Plasmodium falciparum" and etc.}
 }
 \description{
 This function retrieves the target information by chembl id and
@@ -24,10 +24,15 @@ all the Homo sapiens taregts
 get.targets
 }
 \examples{
+\donttest{
+#get target information by chembl ids
 get.targets("CHEMBL1862",type='chemblid')
 
+#get target information by uniprot ids
 get.targets("Q13936",type='uniprot')
 
+#get all the target information using organism name
 get.targets(org="Homo Sapiens")
+}
 }
 

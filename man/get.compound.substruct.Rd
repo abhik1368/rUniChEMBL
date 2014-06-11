@@ -19,4 +19,10 @@ chemical properties.
 \details{
 get.cmp.substruct
 }
+\examples{
+\donttest{
+#get compounds by substructure
+get.cmp.subsruct("CN(CCCN)c1cccc2ccccc12")
+}
+}
 

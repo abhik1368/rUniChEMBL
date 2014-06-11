@@ -8,9 +8,9 @@
 get.bioactivity(x, type = "compound")
 }
 \arguments{
-\item{x}{: chemblid}
+\item{x}{: Input string chemblid}
 
-\item{type:}{\code{'compound'},\code{'target'},\code{'assay'}. Default is
+\item{type}{: Input string \code{'compound'},\code{'target'},\code{'assay'}. Default is
 \code{'compound'}.}
 }
 \description{
@@ -23,8 +23,15 @@ In all cases, ChEMBL identifiers must be used.
 get.bioactivity.
 }
 \examples{
+\donttest{
+# get bioactivities of compounds
 get.bioactivity("CHEMBL12",type='compound')
+
+# get compound bioactivities for targets
 get.bioactivity("CHEMBL240",type="target")
+
+# get bioactivities by assay
 get.bioactivity("CHEMBL1217643",type='assay')
+}
 }
 

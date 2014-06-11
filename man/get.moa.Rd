@@ -8,7 +8,7 @@
 get.moa(x)
 }
 \arguments{
-\item{x}{: chemblid}
+\item{x}{: Input string chemblid}
 }
 \description{
 This function retrieves a data frame of compounds and its
@@ -16,5 +16,11 @@ mode of action for a compound (where compound is a drug) and drug targets.
 }
 \details{
 get.moa
+}
+\examples{
+\donttest{
+# get moa of drug
+get.moa("CHEMBL1642")
+}
 }
 

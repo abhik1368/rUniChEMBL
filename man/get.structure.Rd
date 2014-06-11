@@ -8,9 +8,9 @@
 get.structure(x, s = 1)
 }
 \arguments{
-\item{X}{: chemblid}
+\item{x}{: Input string chemblid}
 
-\item{s}{: source id (default is 1)}
+\item{s}{: Input integer source id (default is 1)}
 }
 \description{
 Get structure(s) currently assigned to a query src_compound_id.
@@ -19,7 +19,11 @@ Get structure(s) currently assigned to a query src_compound_id.
 get.structure
 }
 \examples{
+\donttest{
+# Get Standard inhci and InCHIKey from drugbank compound and source
 get.structure("DB00321",2)
+# Using ChEMBL compound and source id
 get.structure("CHEMBL1231",1)
+}
 }
 

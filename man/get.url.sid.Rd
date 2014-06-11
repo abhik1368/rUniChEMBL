@@ -8,11 +8,11 @@
 get.url.sid(x, y, z)
 }
 \arguments{
-\item{x}{: source compound id}
+\item{x}{: Input string source compound id}
 
-\item{y}{: source id}
+\item{y}{: Input integer source id}
 
-\item{z}{: to source id}
+\item{z}{: Input integer to source id}
 }
 \description{
 Get a list of URLs for all src_compound_ids, from a specified
@@ -20,5 +20,15 @@ source .
 }
 \details{
 get.url.sid
+}
+\examples{
+\donttest{
+# get urls of compounds using source compound id, source id
+# get drugbank url from ChEMBL source id and ChEMBL source
+get.url.sid("ChEMBL490",1,2)
+
+# get chembl url from drugbank id and source
+get.url.sid("DB00715",2,1)
+}
 }
 

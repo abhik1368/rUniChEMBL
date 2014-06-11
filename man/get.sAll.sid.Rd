@@ -8,9 +8,9 @@
 get.sAll.sid(x, y)
 }
 \arguments{
-\item{x}{: chemblid}
+\item{x}{: Input chemblid}
 
-\item{y}{: source id}
+\item{y}{: Input integer source id}
 }
 \description{
 Obtain a list of all src_compound_ids from all sources
@@ -22,7 +22,11 @@ src_compound_id.
 get.sAll.sid
 }
 \examples{
-get.sAll.sid("CHEMBL12","1")
-get.sAll.sid("DB00789","2")
+\donttest{
+# Get all source ids using ChEMBL id and source
+get.sAll.sid("CHEMBL12",1)
+# Using drugbank id and source
+get.sAll.sid("DB00789",2)
+}
 }
 

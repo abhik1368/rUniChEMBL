@@ -1,7 +1,4 @@
-#' rUniChEMBL.
-#' @description This package is built based on the web services of ChEMBL and Unichem
-#' @name rUniChEMBL
-#' @docType package
+
 library(RCurl)
 library(jsonlite)
 
@@ -14,14 +11,19 @@ library(jsonlite)
 #' with a current assignment.
 #' @name get.scid.sid 
 #' @docType package
-#' @param x : Source compound id
-#' @param y : Source id
+#' @param x : Input string Source compound id
+#' @param y : Input integer Source id
 #' @export
 #' @examples
-#' get.scid.sid("CHEMBL12","1")
-#' get.scid.sid("DB00789","2")
+#' \donttest{
+#' # Get source compound ids and source information
+#' # Using ChEMBL ID and source
+#' get.scid.sid("CHEMBL12",1)
+#' # Using drugbank id and source
+#' get.scid.sid("DB00789",2)
+#' }
 get.scid.sid <- function(x,y) {
-    url <- sprintf("https://www.ebi.ac.uk/unichem/rest/src_compound_id/%s/%s",x,y)
+    url <- sprintf("https://www.ebi.ac.uk/unichem/rest/src_compound_id/%s/%d",x,y)
     h <- getCurlHandle()
     d <- getURL(url, curl=h)
     status <- getCurlInfo(h)$response.code
@@ -44,14 +46,18 @@ get.scid.sid <- function(x,y) {
 #' src_compound_id.
 #' @name get.sAll.sid 
 #' @docType package
-#' @param x : chemblid
-#' @param y : source id
+#' @param x : Input chemblid
+#' @param y : Input integer source id
 #' @export
 #' @examples
-#' get.sAll.sid("CHEMBL12","1")
-#' get.sAll.sid("DB00789","2")
+#' \donttest{
+#' # Get all source ids using ChEMBL id and source
+#' get.sAll.sid("CHEMBL12",1)
+#' # Using drugbank id and source
+#' get.sAll.sid("DB00789",2)
+#' }
 get.sAll.sid <- function(x,y) {
-    url <- sprintf("https://www.ebi.ac.uk/unichem/rest/src_compound_id_all/%s/%s",x,y)
+    url <- sprintf("https://www.ebi.ac.uk/unichem/rest/src_compound_id_all/%s/%d",x,y)
     h <- getCurlHandle()
     d <- getURL(url, curl=h)
     status <- getCurlInfo(h)$response.code
@@ -73,15 +79,19 @@ get.sAll.sid <- function(x,y) {
 #' assigned src_compound_ids from both sources.
 #' @name get.mapping.full
 #' @docType package
-#' @param X : source compound id
-#' @param y : source compound id
+#' @param x : Input integer source id
+#' @param y : Input integer source id
 #' @export
 #' @examples
-#' get.mapping.full("3","1")
-#' get.mapping.full("9","1")
+#' \donttest{
+#' # Get full mapping of PDBe and ChEMBL
+#' get.mapping.full(3,1)
+#' # Get full mapping of ZINC and ChEMBL
+#' get.mapping.full(9,1) 
+#' }
 
 get.mapping.full <-function(x,y) {
-    url <- sprintf("https://www.ebi.ac.uk/unichem/rest/mapping/%s/%s",x,y)
+    url <- sprintf("https://www.ebi.ac.uk/unichem/rest/mapping/%d/%d",x,y)
     h <- getCurlHandle()
     d <- getURL(url, curl=h)
     status <- getCurlInfo(h)$response.code
@@ -96,13 +106,16 @@ get.mapping.full <-function(x,y) {
 #' @title Get source compound ids
 #' @description Obtain a list of src_compound_ids (from all sources) which 
 #' are CURRENTLY  assigned to a query InChI Key.
-#' @name get.Src_cidAll.Src_id 
+#' @name get.src_id.InCHIKey 
 #' @docType package
-#' @param X : InCHI Key
+#' @param x : Input string InCHI Key
 #' @export
 #' @examples
+#' \donttest{
+#' # Get source compound ids from InCHIKey 
 #' get.sid.InCHIKey("AAOVKJBEBIDNHE-UHFFFAOYSA-N")
 #' get.sid.InCHIKey("BSYNRYMUTXBXSQ-UHFFFAOYSA-N")
+#' }
 get.sid.InCHIKey<-function(x){
     url <- sprintf("https://www.ebi.ac.uk/unichem/rest/inchikey/%s",x)
     h <- getCurlHandle()
@@ -126,8 +139,13 @@ get.sid.InCHIKey<-function(x){
 #' have current AND obsolete assignments to a query InChIKey
 #' @name get.sAll.InCHIKey
 #' @docType package
-#' @param X : InCHI Key
+#' @param x : Input string InCHI Key
 #' @export
+#' @examples
+#' \donttest{
+#' # Get all the IDs using InCHIKey
+#'  get.sAll.InCHIKey("AAOVKJBEBIDNHE-UHFFFAOYSA-N")
+#' }
 
 get.sAll.InCHIKey<-function(x){
     url <- sprintf("https://www.ebi.ac.uk/unichem/rest/inchikey_all/%s",x)
@@ -151,12 +169,16 @@ get.sAll.InCHIKey<-function(x){
 #' @description Get structure(s) currently assigned to a query src_compound_id.
 #' @name get.structure 
 #' @docType package
-#' @param X : chemblid
-#' @param s : source id (default is 1)
+#' @param x : Input string chemblid
+#' @param s : Input integer source id (default is 1)
 #' @export
 #' @examples
+#' \donttest{
+#' # Get Standard inhci and InCHIKey from drugbank compound and source
 #' get.structure("DB00321",2)
+#' # Using ChEMBL compound and source id
 #' get.structure("CHEMBL1231",1)
+#' }
 
 get.structure<-function(x,s=1){
     url <- sprintf("https://www.ebi.ac.uk/unichem/rest/structure/%s/%d",x,s)
@@ -177,9 +199,16 @@ get.structure<-function(x,s=1){
 #' compound id
 #' @name get.struc.all
 #' @docType package
-#' @param x : chemblid
-#' @param s : source id (default is 1)
+#' @param x : Input string chemblid
+#' @param s : Input integer source id (default is 1)
 #' @export
+#' @examples
+#' \donttest{
+#' # Get all the structure information using ChEMBL id and source.
+#' get.struc.all("CHEMBL1231",1)
+#' #using drugbank id and source
+#' get.structure("DB00321",2)
+#' }
 get.struc.all<-function(x,s=1){
     url <- sprintf("https://www.ebi.ac.uk/unichem/rest/structure_all/%s/%d",x,s)
     h <- getCurlHandle()
@@ -199,12 +228,21 @@ get.struc.all<-function(x,s=1){
 #' source .
 #' @name get.url.sid 
 #' @docType package
-#' @param x : source compound id
-#' @param y : source id
-#' @param z : to source id
+#' @param x : Input string source compound id
+#' @param y : Input integer source id
+#' @param z : Input integer to source id
 #' @export
+#' @examples
+#' \donttest{
+#' # get urls of compounds using source compound id, source id
+#' # get drugbank url from ChEMBL source id and ChEMBL source
+#' get.url.sid("ChEMBL490",1,2)
+#' 
+#' # get chembl url from drugbank id and source 
+#' get.url.sid("DB00715",2,1)
+#' }
 get.url.sid<-function(x,y,z){
-    url <- sprintf("https://www.ebi.ac.uk/unichem/rest/src_compound_id_url/%s/%s/%s",x,y,z)
+    url <- sprintf("https://www.ebi.ac.uk/unichem/rest/src_compound_id_url/%s/%d/%d",x,y,z)
     h <- getCurlHandle()
     d <- getURL(url, curl=h)
     status <- getCurlInfo(h)$response.code
@@ -221,11 +259,18 @@ get.url.sid<-function(x,y,z){
 #' current AND obsolete to the same structure with an obsolete assignment to the #' query src_compound_id.
 #' @name get.SrcAll.obs 
 #' @docType package
-#' @param x: source compound id
-#' @param y: to source id
+#' @param x : Input string source compound id
+#' @param y : Input integer to source id
 #' @export
+#' @examples
+#' \donttest{
+#' #get for drugbank compound and source 
+#' get.sAll.obs("DB07699",2)
+#' #get for chembl compound and source
+#' get.sAll.obs("CHEMBL12",1)
+#' }
 get.sAll.obs<-function(x,y){
-    url <- sprintf("https://www.ebi.ac.uk/unichem/rest/src_compound_id_all_obsolete/%s/%s",x,y)
+    url <- sprintf("https://www.ebi.ac.uk/unichem/rest/src_compound_id_all_obsolete/%s/%d",x,y)
     h <- getCurlHandle()
     d <- getURL(url, curl=h)
     status <- getCurlInfo(h)$response.code
@@ -260,8 +305,15 @@ get.sAll.obs<-function(x,y){
 #' shown if aux_for_url=1).
 #' @name get.verbose.InCHIkey
 #' @docType package
-#' @param x : InCHI Key
+#' @param x : Input string InCHI Key
 #' @export
+#' @examples
+#' \donttest{
+#' # get for InCHIkey 
+#' get.verbose.InCHIkey("GZUITABIAKMVPG-UHFFFAOYSA-N") 
+#' 
+#' get.verbose.InCHIkey("AAOVKJBEBIDNHE-UHFFFAOYSA-N") 
+#' }
 
 get.verbose.InCHIkey<-function(x){
     url <- sprintf("https://www.ebi.ac.uk/unichem/rest/verbose_inchikey/%s",x)
@@ -275,19 +327,25 @@ get.verbose.InCHIkey<-function(x){
         return(NULL)
     }
 }
-#' get.compound
+#' get.cmp.inf
 #' @title Get compound information from ChEMBL
 #' @description These functions allow one to retrieve compounds information from ChEMBL
 #' compounds are identified either by a ChEMBL ID or by a standard InChI key.
-#' @name get.compound
+#' @name get.cmp.inf
 #' @docType package
 #' @param x : String representing chemblid or standard InCHI key for the molecule.
-#' @param type: For \code{get.compound}, one of \code{chemblid} or 
-#' \code{stdinchi} to #'indicate the nature of the molecule id. 
-#' For the case of \code{get.compound.list} valid types are \code{cansmi}, 
-#' \code{substructure} and \code{similarity}.
+#' @param type : For \code{get.compound}, one of \code{chemblid} or 
+#' \code{stdinchi} to indicate the nature of the molecule id. 
 #' @export
-get.compound <- function(x, type='chemblid') {
+#' @examples
+#' \donttest{
+#' #get information for chembl compound id
+#' get.compound("CHEMBL12")
+#' 
+#' #get information for standard inchi
+#' get.compound("QFFGVLORLPOAEC-SNVBAGLBSA-N",type='stdinchi')
+#' }
+get.cmp.inf <- function(x, type='chemblid') {
     types <- c('chemblid', 'stdinchi')
     type <- pmatch(type, types)
     if (is.na(type)) stop("Invalid type given")
@@ -305,6 +363,7 @@ get.compound <- function(x, type='chemblid') {
         return(NULL)
     }
 }
+
 #' get.cmp.sim
 #' @title Retrive similar compounds from ChEMBL database.
 #' @description This function retrieves a dataframe of similar compounds 
@@ -312,7 +371,7 @@ get.compound <- function(x, type='chemblid') {
 #' @name get.cmp.sim 
 #' @docType package
 #' @param mol : String representing smiles of the moelcule
-#' @param sim: Integer representing for percentage of similarity 
+#' @param sim : Integer representing for percentage of similarity 
 #' for the query compound and the database molecules. Values ranges 
 #' from 70 to 100.
 #' @export
@@ -338,10 +397,14 @@ get.cmp.sim <- function(mol,sim=70) {
 #' @docType package
 #' @param mol : String representing smiles of the moelcule
 #' @export
+#' @examples
+#' \donttest{
+#' #get compounds by substructure
+#' get.cmp.subsruct("CN(CCCN)c1cccc2ccccc12")
+#' }
 
 get.cmp.substruct<-function(mol){
-    url <- 'https://www.ebi.ac.uk/chemblws/compounds/substructure/'
-    url <- sprintf('%s%s.json', url,mol)
+    url <- sprintf('https://www.ebi.ac.uk/chemblws/compounds/substructure/%s.json',mol)
     h <- getCurlHandle()
     d <- getURL(url, curl=h)
     status <- getCurlInfo(h)$response.code
@@ -359,15 +422,18 @@ get.cmp.substruct<-function(mol){
 #' ChEMBL database given a string of ChEMBL target ID.
 #' @name get.appDrugs
 #' @docType package
-#' @param x : ChEMBL target ID.
+#' @param x : string  ChEMBL target ID.
 #' @export
+#' @examples
+#' \donttest{
+#' #get chembl ids of approved drugs
+#' get.appDrugs("CHEMBL1824")
+#' }
 get.appDrugs<-function(x){
-    url <- 'https://www.ebi.ac.uk/chemblws/targets/'
-    url<-sprintf('%s%s/approvedDrug.json',url,x)
+    url<-sprintf('https://www.ebi.ac.uk/chemblws/targets/%s/approvedDrug.json',x)
     h <- getCurlHandle()
     d <- getURL(url, curl=h)
     status <- getCurlInfo(h)$response.code
-    ctype <- getCurlInfo(h)$content.type
     rm(h)
     if (status == 200) {
         return(fromJSON(d))[[1]]
@@ -383,15 +449,21 @@ get.appDrugs<-function(x){
 #' In all cases, ChEMBL identifiers must be used.
 #' @name get.bioactivity
 #' @docType package
-#' @param x : chemblid
-#' @param type: \code{'compound'},\code{'target'},\code{'assay'}. Default is 
+#' @param x : Input string chemblid
+#' @param type : Input string \code{'compound'},\code{'target'},\code{'assay'}. Default is 
 #' \code{'compound'}.
 #' @export
 #' @examples
+#' \donttest{
+#' # get bioactivities of compounds
 #' get.bioactivity("CHEMBL12",type='compound')
-#' get.bioactivity("CHEMBL240",type="target")
-#' get.bioactivity("CHEMBL1217643",type='assay')
 #' 
+#' # get compound bioactivities for targets
+#' get.bioactivity("CHEMBL240",type="target")
+#' 
+#' # get bioactivities by assay
+#' get.bioactivity("CHEMBL1217643",type='assay')
+#' }
 get.bioactivity <- function(x, type='compound') {
     types <- c('compound', 'target', 'assay')
     type <- pmatch(type, types)
@@ -418,8 +490,13 @@ get.bioactivity <- function(x, type='compound') {
 #' mode of action for a compound (where compound is a drug) and drug targets.
 #' @name get.moa 
 #' @docType package
-#' @param x : chemblid
-#' @export 
+#' @param x : Input string chemblid
+#' @export
+#' @examples
+#' \donttest{
+#' # get moa of drug
+#' get.moa("CHEMBL1642")
+#' } 
 get.moa<-function(x){
     url <- 'https://www.ebi.ac.uk/chemblws/compounds/'
     url<-sprintf('%s%s/drugMechanism.json',url,x)
@@ -442,18 +519,21 @@ get.moa<-function(x){
 #' all the Homo sapiens taregts
 #' @name get.targets  
 #' @docType package
-#' @param x : chemblid
-#' @param type: 'chemblid' or 'uniprot'
-#' @param org: Species name like "Homo sapiens","Plasmodium falciparum" and etc.
+#' @param x : Input string chemblid
+#' @param type : Input string 'chemblid' or 'uniprot'
+#' @param org : Input string species name like "Homo sapiens","Plasmodium falciparum" and etc.
 #' @export
 #' @examples
+#' \donttest{
+#' #get target information by chembl ids
 #' get.targets("CHEMBL1862",type='chemblid')
 #' 
+#' #get target information by uniprot ids
 #' get.targets("Q13936",type='uniprot')
 #' 
+#' #get all the target information using organism name
 #' get.targets(org="Homo Sapiens")
-#' 
-#' 
+#' }
 
 
 get.targets <- function(x,type='chemblid',org=NULL){

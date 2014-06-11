@@ -8,7 +8,7 @@
 get.sAll.InCHIKey(x)
 }
 \arguments{
-\item{X}{: InCHI Key}
+\item{x}{: Input string InCHI Key}
 }
 \description{
 Get a list of all src_compound_ids (from all sources) which
@@ -16,5 +16,11 @@ have current AND obsolete assignments to a query InChIKey
 }
 \details{
 get.sAll.InCHIKey
+}
+\examples{
+\donttest{
+# Get all the IDs using InCHIKey
+ get.sAll.InCHIKey("AAOVKJBEBIDNHE-UHFFFAOYSA-N")
+}
 }
 
