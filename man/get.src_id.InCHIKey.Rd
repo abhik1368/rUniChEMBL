@@ -13,7 +13,8 @@ get.sid.InCHIKey(x)
 }
 \description{
 Obtain a list of src_compound_ids (from all sources) which
-are CURRENTLY  assigned to a query InChI Key.
+are CURRENTLY  assigned to a query InChI Key. Returns a list of data from
+Unichem and ChEMBL databases.
 }
 \details{
 get.src_id.InCHIKey
@@ -22,7 +23,12 @@ get.src_id.InCHIKey
 \donttest{
 # Get source compound ids from InCHIKey
 get.sid.InCHIKey("AAOVKJBEBIDNHE-UHFFFAOYSA-N")
-get.sid.InCHIKey("BSYNRYMUTXBXSQ-UHFFFAOYSA-N")
+
+data<-get.sid.InCHIKey("BSYNRYMUTXBXSQ-UHFFFAOYSA-N")
+# to get chembl data
+data$Chem
+to get Unichem data
+data$Uni
 }
 }
 

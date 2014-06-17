@@ -21,9 +21,4 @@ from ChEMBL database given a smiles string as query and also given a similarity 
 \details{
 get.cmp.sim
 }
-\examples{
-# Get compound similarity with 70 percent or more
-get.cmp.sim("c1ccc(cc1)CN(c2cc(ccc2[N+](=O)[O-])c3c(nc(nc3CC)N)N)C",sim=70)
-# Get compound similarity with 80 percent or more
-get.cmp.sim("c1ccc(cc1)CN(c2cc(ccc2[N+](=O)[O-])c3c(nc(nc3CC)N)N)C",sim=80)
-}
+
