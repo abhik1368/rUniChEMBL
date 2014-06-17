@@ -1,4 +1,3 @@
-
 library(RCurl)
 library(jsonlite)
 
@@ -105,7 +104,8 @@ get.mapping.full <-function(x,y) {
 #' get.src_id.InCHIKey
 #' @title Get source compound ids
 #' @description Obtain a list of src_compound_ids (from all sources) which 
-#' are CURRENTLY  assigned to a query InChI Key.
+#' are CURRENTLY  assigned to a query InChI Key. Returns a list of data from 
+#' Unichem and ChEMBL databases.
 #' @name get.src_id.InCHIKey 
 #' @docType package
 #' @param x : Input string InCHI Key
@@ -114,12 +114,19 @@ get.mapping.full <-function(x,y) {
 #' \donttest{
 #' # Get source compound ids from InCHIKey 
 #' get.sid.InCHIKey("AAOVKJBEBIDNHE-UHFFFAOYSA-N")
-#' get.sid.InCHIKey("BSYNRYMUTXBXSQ-UHFFFAOYSA-N")
+#'
+#' data<-get.sid.InCHIKey("BSYNRYMUTXBXSQ-UHFFFAOYSA-N")
+#' # to get chembl data 
+#' data$Chem
+#' to get Unichem data
+#' data$Uni
 #' }
 get.sid.InCHIKey<-function(x){
-    url <- sprintf("https://www.ebi.ac.uk/unichem/rest/inchikey/%s",x)
+    url_uni <- sprintf("https://www.ebi.ac.uk/unichem/rest/inchikey/%s",x)
+    url_chem<-sprintf("https://www.ebi.ac.uk/chemblws/compounds/stdinchikey/%s.json",x)
     h <- getCurlHandle()
-    d <- getURL(url, curl=h)
+    d <- getURL(url_uni, curl=h)
+    c<-getURL(url_chem, curl=h)
     status <- getCurlInfo(h)$response.code
     rm(h)
     if (status == 200) {
@@ -127,7 +134,8 @@ get.sid.InCHIKey<-function(x){
         sn<-SourceNames
         data<-fromJSON(d)
         df<-merge(data,sn,by.x="src_id",by.y="src_id")
-        return(df)
+        cf<-do.call(rbind, lapply(fromJSON(c), data.frame))
+        return(list(uni=df,Chem=cf))
     } else {
         return(NULL)
     }
@@ -570,3 +578,4 @@ get.targets <- function(x,type='chemblid',org=NULL){
     } 
     
 }
+
